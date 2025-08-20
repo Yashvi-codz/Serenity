@@ -1,0 +1,14 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<link href="/css/activities.css" rel="stylesheet">
+<div class="activity-page">
+  <h2><%=activityPageHeading%></h2>
+    <h5><%=activityPageDescription%></h5>
+  <div class="all-activities">
+    <% for(let activity of myMoodActivities){%>
+    <div class="activity-card">
+      <img src="<%=activity.image%>" alt="<%=activity.title%>" />
+      <h4><%=activity.title%></h4>
+    </div>
+    <%}%>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+.question {
+  margin-bottom: 40px;
+}
+.question h3 {
+  margin-bottom: 20px;
+}
+.radio-group {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 700px;
+}
+.radio-group input[type="radio"] {
+  display: none;
+}
+.radio-group label {
+  border-radius: 30px;
+}
+.radio-group label img {
+  width: 200px;
+  height: auto;
+  border-radius: 30px;
+  cursor: pointer;
+  border: 2px solid black;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.radio-group input[type="radio"]:checked + label img {
+  border: 4px solid #9c27b0;
+  box-shadow: 0 6px 12px rgba(156, 39, 176, 0.3);
+  transform: scale(1.05);
+}
+.mood-page {
+  min-height: 100vh;
+  width: 100vw;
+  background: radial-gradient(circle, #ffffff, #fbe6ef, #fad8e5);
+  padding: 50px 400px 100px 300px;
+}

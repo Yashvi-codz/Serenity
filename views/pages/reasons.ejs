@@ -1,0 +1,24 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<link href="/css/reasons.css" rel="stylesheet">
+<div class="reason-page">
+  <form action="/mood/<%=mood%>" method="post">
+    <% myMood.forEach((ques, qIndex) => { %>
+    <div class="question">
+      <h3><%=ques.question%></h3>
+      <div class="radio-group">
+        <% ques.options.forEach((opt, oIndex) => { let id =
+        `q${qIndex}-opt${oIndex}`; %>
+        <input
+          type="radio"
+          id="<%=id%>"
+          name="question-<%= qIndex %>"
+          value="<%=opt%>"
+        />
+        <label for="<%=id%>" class="opt"><%=opt%></label>
+        <% }) %>
+      </div>
+    </div>
+    <% } )%>
+    <button class="opt-btn submit-btn" id="submit-btn">Submit</button>
+  </form>
+</div>

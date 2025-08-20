@@ -1,0 +1,47 @@
+<% layout("/layouts/boilerplate") %>
+<link href="/css/mood.css" rel="stylesheet">
+<div class="mood-page">
+  <form action="/mood" method="post">
+    <div class="question">
+      <h3>How are you feeling right now?</h3>
+      <div class="radio-group">
+        <input type="radio" id="q1opt1" name="mood" value="Happy"/>
+        <label for="q1opt1"><img src="images/moods/happy.jpeg" alt="happy"></label>
+
+        <input type="radio" id="q1opt2" name="mood" value="Sad"/>
+        <label for="q1opt2"><img src="images/moods/sad.jpeg" alt="sad"></label>
+
+        <input type="radio" id="q1opt3" name="mood" value="Anxious"/>
+        <label for="q1opt3"><img src="images/moods/anxious.jpeg" alt="anxious"></label>
+
+        <input type="radio" id="q1opt4" name="mood" value="Excited"/>
+        <label for="q1opt4"><img src="images/moods/excited.jpeg" alt="excited"></label>
+
+        <input type="radio" id="q1opt5" name="mood" value="Tired"/>
+        <label for="q1opt5"><img src="images/moods/tired.jpeg" alt="tired"></label>
+
+        <input type="radio" id="q1opt6" name="mood" value="Confused"/>
+        <label for="q1opt6"><img src="images/moods/confused.jpeg" alt="confused"></label>
+
+        <input type="radio" id="q1opt7" name="mood" value="Angry"/>
+        <label for="q1opt7"><img src="images/moods/angry.jpeg" alt="angry"></label>
+
+        <input type="radio" id="q1opt8" name="mood" value="Relieved"/>
+        <label for="q1opt8"><img src="images/moods/relieved.jpeg" alt="relieved"></label>
+
+        <input type="radio" id="q1opt9" name="mood" value="Energetic"/>
+        <label for="q1opt9"><img src="images/moods/energetic.jpeg" alt="energetic"></label>
+
+        <input type="radio" id="q1opt10" name="mood" value="Calm"/>
+        <label for="q1opt10"><img src="images/moods/calm.jpeg" alt="calm"></label>
+
+        <input type="radio" id="q1opt11" name="mood" value="Loved"/>
+        <label for="q1opt11"><img src="images/moods/loved.jpeg" alt="loved"></label>
+
+        <input type="radio" id="q1opt12" name="mood" value="Lonely"/>
+        <label for="q1opt12"><img src="images/moods/lonely.jpeg" alt="lonely"></label>
+      </div>
+    </div>
+    <button class="opt-btn submit-btn" id="submit-btn">Submit</button>
+  </form>
+</div>

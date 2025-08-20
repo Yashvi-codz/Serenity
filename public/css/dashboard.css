@@ -1,0 +1,135 @@
+.choice-page {
+  min-height: 100vh;
+  width: 100vw;
+  background: radial-gradient(circle, #ffffff, #fbe6ef, #fad8e5);
+}
+.row1 {
+  width: 100vw;
+  padding: 80px 50px 50px 80px;
+  display: flex;
+}
+.row2 {
+  display: flex;
+  padding-bottom: 80px;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+.option {
+  height: 500px;
+  width: 400px;
+  margin: 20px;
+  background-color: white;
+  border-radius: 25px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(255, 182, 193, 0.4),
+    0 4px 10px rgba(255, 192, 203, 0.3);
+}
+.option h1 {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+.option button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 15px 25px;
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(90deg, #9c27b0 0%, #e91e63 100%);
+  border: 0;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.affirmation-card {
+  background: #fef4fb; /* soft pink highlight */
+  border: 6px solid #f8c6e7;
+}
+
+.affirmation-card h3 {
+  font-weight: 700;
+  color: #9c27b0;
+}
+
+.affirmation-text {
+  font-size: 25px;
+  font-weight: 500;
+  color: #333;
+  margin: 15px 0 0;
+  line-height: 1.4;
+}
+.tracker {
+  width: 87vw;
+  height: 400px;
+  background-color: white;
+  border-radius: 25px;
+}
+.mood-box {
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 20px;
+  border-radius: 20px;
+  background: radial-gradient(circle, #ffffff 0%, #ffd6e0 40%, #f8a5c2 80%);
+  box-shadow: 0 0 30px rgba(248, 165, 194, 0.4);
+  transition: all 0.6s ease-in-out;
+}
+.bubble {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 50px auto;
+}
+
+/* Inner circle (main content) */
+.bubble-inner {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, #ffd6e0 60%, #f8a5c2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  z-index: 2;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.6);
+}
+
+/* Aura / glow circle */
+.bubble::before {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(248, 165, 194, 0.5),
+    transparent 70%
+  );
+  filter: blur(20px);
+  z-index: 1;
+  animation: pulse 5s infinite ease-in-out;
+}
+
+/* Glow animation */
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}

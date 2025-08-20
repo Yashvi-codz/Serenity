@@ -1,0 +1,59 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<link href="/css/dashboard.css" rel="stylesheet">
+<div class="choice-page">
+    <div class="row1">
+        <div class="option opt1">
+            <h1>Do you want to talk?</h1>
+            <h5>Solace is there for you</h5>
+            <form action="/solace" method="get">
+                <button>Let's talk <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i></button>
+            </form>
+        </div>
+        <div class="option affirmation-card">
+            <h3>🌟 Daily Affirmation</h3>
+            <p class="affirmation-text"><%=todayaffirmation%></p>
+        </div>
+        <div class="option opt2">
+            <h1>Want to track your emotions</h1>
+            <h5>Let's do it</h5>
+            <form action="/mood" method="get">
+                <button>Let's Track <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i></button>
+            </form>
+        </div>
+    </div>
+    <div class="row2">
+        <div class="tracker"></div>
+    </div>
+    <div>
+      <div id="moodBox" class="mood-box"></div>
+    </div>
+    <div class="bubble">
+      <div class="bubble-inner">Loved 💕</div>
+    </div>
+</div>
+<script>
+  // moods with aura backgrounds
+  const moods = [
+    { text: "Excited 🌞", bg: "radial-gradient(circle, #ffffff 0%, #fff9b0 40%, #ffd6e0 80%)" },
+    { text: "Calm 🌿", bg: "radial-gradient(circle, #ffffff 0%, #d3f9d8 40%, #a0e7e5 80%)" },
+    { text: "Lonely 🌧", bg: "radial-gradient(circle, #ffffff 0%, #dee2ff 40%, #a6b3be 80%)" },
+    { text: "Confused 🌪", bg: "radial-gradient(circle, #ffffff 0%, #f3d9fa 40%, #cdb4db 80%)" },
+    { text: "Loved 💕", bg: "radial-gradient(circle, #ffffff 0%, #ffd6e0 40%, #f8a5c2 80%)" },
+    { text: "Hopeful ✨", bg: "radial-gradient(circle, #ffffff 0%, #c3f9f1 40%, #7ee7d6 80%)" }
+  ];
+
+  let index = 0;
+  const box = document.getElementById("moodBox");
+
+  function updateMood() {
+    box.textContent = moods[index].text;
+    box.style.background = moods[index].bg;
+    index = (index + 1) % moods.length;
+  }
+
+  // first load
+  updateMood();
+
+  // change every 7s
+  setInterval(updateMood, 2000);
+</script>
