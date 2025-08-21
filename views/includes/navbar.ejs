@@ -6,11 +6,18 @@
     </a>
   </div>
   <div class="nav-right">
-    <form>
-      <button class="home-btn btn-nav">Sign In</button>
-    </form>
-    <form>
-      <button class="home-btn btn-nav">Sign Up</button>
-    </form>
+    <% if(!currentUser) {%>
+      <form action="/signin" method="get">
+        <button class="home-btn btn-nav">Sign In</button>
+      </form>
+      <form action="/signup" method="get">
+        <button class="home-btn btn-nav">Sign Up</button>
+      </form>
+    <% } %>
+    <% if(currentUser) {%>
+      <form action="/logout" method="get">
+        <button class="home-btn btn-nav">Log Out</button>
+      </form>
+    <% } %>
   </div>
 </div>
