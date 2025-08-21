@@ -1,7 +1,7 @@
 <% layout("/layouts/boilerplate.ejs") %>
-<link href="/css/reasons.css" rel="stylesheet">
+<link href="/css/reasons.css" rel="stylesheet" />
 <div class="reason-page">
-  <form action="/mood/<%=mood%>" method="post">
+  <form action="/mood/<%=mood%>" method="post" id="mood-form">
     <% myMood.forEach((ques, qIndex) => { %>
     <div class="question">
       <h3><%=ques.question%></h3>
@@ -13,6 +13,7 @@
           id="<%=id%>"
           name="question-<%= qIndex %>"
           value="<%=opt%>"
+          required
         />
         <label for="<%=id%>" class="opt"><%=opt%></label>
         <% }) %>
@@ -22,3 +23,47 @@
     <button class="opt-btn submit-btn" id="submit-btn">Submit</button>
   </form>
 </div>
+<script>
+  document.getElementById("mood-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const urlParts = window.location.pathname.split("/");
+    const mood = urlParts[urlParts.indexOf("mood") + 1];
+    const allReasons = [];
+
+    for (let qIndex = 1; qIndex <= 5; qIndex++) {
+      const questionName = `question-${qIndex}`;
+      const checkedInputs = document.querySelectorAll(
+        `input[name="${questionName}"]:checked`
+      );
+      checkedInputs.forEach((input) => {
+        allReasons.push(input.value);
+      });
+    }
+
+    const data = {
+      reasons: allReasons,
+    };
+
+    try {
+      const response = await fetch(`/mood/${mood}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        window.location.href = `/mood/${mood}/activities`;
+      } else {
+        const error = await response.json();
+        console.error("Error saving mood:", error.message);
+        alert("Error: " + error.message);
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+      alert("An error occurred. Please try again.");
+    }
+  });
+</script>
