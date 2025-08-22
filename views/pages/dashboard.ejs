@@ -1,23 +1,62 @@
 <% layout("/layouts/boilerplate.ejs") %>
-<link href="/css/dashboard.css" rel="stylesheet">
+<link href="/css/dashboard.css" rel="stylesheet" />
 <div class="choice-page">
-    <div class="row1">
-        <div class="option opt1">
-            <h1>Do you want to talk?</h1>
-            <h5>Solace is there for you</h5>
-            <form action="/solace" method="get">
-                <button>Let's talk <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i></button>
-            </form>
+  <div class="row1">
+    <div class="option opt1">
+      <h1>Do you want to talk?</h1>
+      <h5>Solace is there for you</h5>
+      <form action="/solace" method="get">
+        <button>
+          Let's talk
+          <i class="fa-solid fa-chevron-right" style="color: #ffffff"></i>
+        </button>
+      </form>
+    </div>
+    <div class="option affirmation-card">
+      <h3>🌟 Daily Affirmation</h3>
+      <p class="affirmation-text"><%=todayaffirmation%></p>
+    </div>
+    <div class="option">
+      <h1>Want to track your emotions</h1>
+      <h5>Let's do it</h5>
+      <form action="/mood" method="get">
+        <button>
+          Let's Track
+          <i class="fa-solid fa-chevron-right" style="color: #ffffff"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="row2">
+    <div class="option opt2">
+      <h1>Want to track your mood histroy</h1>
+      <h5>See your overall mood at glimpse</h5>
+      <br>
+      <div class="opt3">
+        <div class="opt4">
+          <h3>📊 Weekly Mood Summary</h3>
+          <ul>
+            <% if(Object.keys(summary).length === 0) { %>
+            <li>No moods logged this week</li>
+            <% } else { %> <% for(let mood in summary) { %>
+            <li><%= mood %>: <%= summary[mood] %> times</li>
+            <% } %> <% } %>
+          </ul>
         </div>
-        <div class="option affirmation-card">
-            <h3>🌟 Daily Affirmation</h3>
-            <p class="affirmation-text"><%=todayaffirmation%></p>
+        <div class="opt4">
+          <h3>🔥 Streak Counter</h3>
+          <p>
+            You’ve logged your mood for <strong><%= streak %></strong> day(s) in
+            a row!
+          </p>
         </div>
-        <div class="option opt2">
-            <h1>Want to track your emotions</h1>
-            <h5>Let's do it</h5>
-            <form action="/mood" method="get">
-                <button>Let's Track <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i></button>
-            </form>
-        </div>
+      </div>
+      <form action="/moodtracker" method="get">
+        <button>
+          Let's See
+          <i class="fa-solid fa-chevron-right" style="color: #ffffff"></i>
+        </button>
+      </form>
+    </div>
+  </div>
 </div>

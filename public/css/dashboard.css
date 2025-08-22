@@ -46,7 +46,7 @@
   cursor: pointer;
 }
 .affirmation-card {
-  background: #fef4fb; /* soft pink highlight */
+  background: #fef4fb;
   border: 6px solid #f8c6e7;
 }
 
@@ -68,12 +68,33 @@
   background-color: white;
   border-radius: 25px;
 }
-.mood-box {
-  font-size: 1.5rem;
-  text-align: center;
+.opt2 {
+  min-height: 500px;
+  width: 86vw;
+}
+.opt4 ul {
+  list-style: none;
+  padding: 0;
+}
+.opt4 ul li {
+  margin: 5px 0;
+}
+.opt3{
+  display:flex;
+  justify-content: center;
+  align-content: center;
+}
+.opt4{
+  height: 200px;
+  width: 500px;
+  margin: 20px;
+  border-radius: 25px;
   padding: 20px;
-  border-radius: 20px;
-  background: radial-gradient(circle, #ffffff 0%, #ffd6e0 40%, #f8a5c2 80%);
-  box-shadow: 0 0 30px rgba(248, 165, 194, 0.4);
-  transition: all 0.6s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  background: #fef4fb;
+  border: 2px solid #f8c6e7;
 }

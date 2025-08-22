@@ -1,0 +1,42 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<link href="css/moodTracker.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div class="mood-page">
+    <header class="topbar">
+    <h1>Hi <%= username %> 👋 — Your Mood Tracker</h1>
+    <p class="subtitle">Visualize your moods and the reasons behind them</p>
+    </header>
+
+    <main class="wrap">
+    <section class="card">
+        <h2>Mood Frequency</h2>
+        <canvas id="moodFrequency"></canvas>
+    </section>
+
+    <section class="card">
+        <h2>Mood Over Time</h2>
+        <p class="hint">
+        *We map moods to a score (e.g., Happy=5, Calm=4, Neutral=3, Sad=2,
+        Angry=1) to draw the line.
+        </p>
+        <canvas id="moodOverTime"></canvas>
+    </section>
+
+    <section class="card">
+        <h2>Reasons Breakdown</h2>
+        <canvas id="reasonsBreakdown"></canvas>
+    </section>
+
+    <section class="card">
+        <h2>Monthly Mood Heatmap</h2>
+        <div id="heatmap" class="heatmap-grid"></div>
+        <p class="hint">
+        Color squares represent daily mood intensity in the current month.
+        </p>
+    </section>
+    </main>
+</div>
+<script>
+  window.SERENITY = { username: "<%= username %>" };
+</script>
+<script src="js/moodtracker.js"></script>
