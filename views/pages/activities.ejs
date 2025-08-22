@@ -7,7 +7,8 @@
     <% for(let activity of myMoodActivities){%>
     <div class="activity-card">
       <img src="<%=activity.image%>" alt="<%=activity.title%>" />
-      <h4><%=activity.title%></h4>
+      <h4><b><%=activity.title%></b></h4>
+      <p><%=activity.description%></p>
     </div>
     <%}%>
   </div>
