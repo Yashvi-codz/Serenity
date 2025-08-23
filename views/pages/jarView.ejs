@@ -1,0 +1,22 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<link rel="stylesheet" href="/css/jar.css" />
+<div class="jar-view-page">
+  <h2>Secret Jar — <%= month %> 🍯</h2>
+  <br />
+  <br />
+  <% if (isLocked) { %>
+  <p>
+    This jar opens after <%= lockedUntil.toISOString().slice(0,10) %>.
+    <br />Patience 🌿
+  </p>
+  <% } else { %>
+  <ul>
+    <% notes.forEach(n => { %>
+    <li>
+      <%= n.text %>
+      <small>(<%= new Date(n.createdAt).toLocaleDateString() %>)</small>
+    </li>
+    <% }) %>
+  </ul>
+  <% } %>
+</div>

@@ -1,0 +1,23 @@
+<link href="/css/jar.css" rel="stylesheet" />
+<div class="jar-widget card serene">
+  <h3>Secret Jar 🍯</h3>
+  <button id="openJarPopup" class="btn">Drop a Secret</button>
+  <a href="/jar/open" class="btn ghost">Open Jar</a>
+</div>
+<div id="jarModal" class="jar-widget modal">
+  <div class="modal-content">
+    <span id="closeJarPopup" class="close">&times;</span>
+    <form action="/jar" method="POST">
+      <textarea
+        name="text"
+        maxlength="500"
+        placeholder="whisper something…"
+        required
+      ></textarea>
+      <div class="controls">
+        <span id="jarCount">0/500</span>
+        <button type="submit" class="btn">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

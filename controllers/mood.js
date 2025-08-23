@@ -8,7 +8,9 @@ const {
 const User = require('../models/user.js');
 
 module.exports.renderChooseMood = (req, res) => {
-  res.render("pages/mood.ejs");
+  if (req.isAuthenticated()) {
+    res.render("pages/mood.ejs");
+  }else res.redirect("/signup");
 };
 module.exports.chooseMood = (req, res) => {
   let mood = req.body.mood;
@@ -16,10 +18,12 @@ module.exports.chooseMood = (req, res) => {
 };
 
 module.exports.renderMoodQues = (req, res) => {
-  let mood = req.params.moodName;
-  let myMood = allMoods[mood];
-  let myMoodStyle = moodStyles[mood];
-  res.render("pages/reasons.ejs", { mood, myMood, myMoodStyle });
+  if (req.isAuthenticated()) {
+    let mood = req.params.moodName;
+    let myMood = allMoods[mood];
+    let myMoodStyle = moodStyles[mood];
+    res.render("pages/reasons.ejs", { mood, myMood, myMoodStyle });
+  }else res.redirect("/signup");
 };
 module.exports.moodQues = async (req, res) => {
   try {
@@ -57,6 +61,7 @@ module.exports.moodQues = async (req, res) => {
 };
 
 module.exports.renderMoodActivities = (req, res) => {
+  if (req.isAuthenticated()) {
   let mood = req.params.moodName;
   let myMoodStyle = moodStyles[mood];
   let myMoodActivities = moodActivities[mood];
@@ -69,4 +74,5 @@ module.exports.renderMoodActivities = (req, res) => {
     activityPageHeading,
     activityPageDescription,
   });
+}else res.redirect("/signup");
 };

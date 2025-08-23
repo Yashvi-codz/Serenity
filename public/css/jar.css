@@ -1,0 +1,77 @@
+.jar-widget .modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+.jar-widget .modal-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 16px;
+  max-width: 400px;
+}
+.jar-widget .close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+.jar-widget textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  margin-bottom: 12px;
+}
+.jar-widget .controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.jar-widget .btn {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 15px 25px;
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(90deg, #9c27b0 0%, #e91e63 100%);
+  border: 0;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.jar-widget .btn.ghost {
+  background: white;
+  border:2px solid black;
+  color: #111;
+}
+.card{
+  height: 300px;
+  width: 400px;
+  padding:20px;
+  margin-left: 30px;
+  background-color: white;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(255, 182, 193, 0.4),
+    0 4px 10px rgba(255, 192, 203, 0.3);
+}
+.jar-view-page{
+  min-height: 75vh;
+  width: 100vw;
+  padding: 50px 100px 100px 100px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  background: radial-gradient(circle, #ffffff, #fbe6ef, #fad8e5);
+}

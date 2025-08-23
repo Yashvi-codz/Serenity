@@ -12,9 +12,12 @@ const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 
-const { affirmations } = require("./public/js/affirmations.js");
+const authRouter = require("./routes/auth.js");
+const trackerRouter = require("./routes/moodtracker.js");
+const dashboardRouter = require("./routes/dashboard.js");
 const moodRouter = require("./routes/mood.js");
 const solaceRouter = require("./routes/solace.js");
+const jarRouter = require("./routes/jar.js");
 const User = require("./models/user.js");
 
 app.set("view engine", "ejs");
@@ -83,125 +86,11 @@ app.get("/getstarted", (req, res) => {
   res.render("pages/getStarted.ejs");
 });
 
-app.get("/signup", (req, res) => {
-  res.render("pages/signup.ejs");
-});
-
-app.post("/signup", async (req, res) => {
-  let { username, age, email, password } = req.body;
-  const newUser = new User({ username, email, age });
-  await User.register(newUser, password);
-  res.redirect("/dashboard");
-});
-
-app.get("/signin", (req, res) => {
-  res.render("pages/signin.ejs");
-});
-
-app.post(
-  "/signin",
-  passport.authenticate("local", { failureRedirect: "/login" }),
-  async (req, res) => {
-    res.redirect("/dashboard");
-  }
-);
-
-app.get("/logout", (req, res) => {
-  req.logout((err) => {
-    if (err) {
-      console.log(err);
-      next(err);
-    }
-  });
-  res.redirect("/getStarted");
-});
-
-app.get("/dashboard", async (req, res) => {
-  if (req.isAuthenticated()) {
-    let randomIndex = Math.floor(Math.random() * affirmations.length);
-    let todayaffirmation = affirmations[randomIndex];
-
-    const userId = req.user._id;
-    const user = await User.findById(userId);
-
-    const now = new Date();
-    const sevenDaysAgo = new Date();
-    sevenDaysAgo.setDate(now.getDate() - 7);
-
-    // filter moods in last 7 days
-    const recentMoods = user.moods.filter((m) => m.date >= sevenDaysAgo);
-
-    // count frequency of moods
-    const summary = {};
-    recentMoods.forEach((entry) => {
-      summary[entry.mood] = (summary[entry.mood] || 0) + 1;
-    });
-
-    // --- streak counter ---
-    let streak = 0;
-    let dayPointer = new Date(now);
-
-    while (true) {
-      const logged = user.moods.some((m) => {
-        const d = new Date(m.date);
-        return (
-          d.getDate() === dayPointer.getDate() &&
-          d.getMonth() === dayPointer.getMonth() &&
-          d.getFullYear() === dayPointer.getFullYear()
-        );
-      });
-
-      if (logged) {
-        streak++;
-        dayPointer.setDate(dayPointer.getDate() - 1);
-      } else {
-        break;
-      }
-    }
-
-    res.render("pages/dashboard.ejs", { todayaffirmation,summary, streak });
-  } else res.redirect("/signup");
-});
-
-async function resolveCurrentUser(req) {
-  if (req.session && req.session.userId) {
-    return await User.findById(req.user._id);
-  }
-  if (req.query && req.query.username) {
-    return await User.findOne({ username: req.query.username });
-  }
-  return await User.findOne({});
-}
-
-app.get("/moodtracker", async (req, res) => {
-  try {
-    const user = await resolveCurrentUser(req);
-    if (!user) {
-      return res.render("pages/moodTracker", {
-        username: "No User",
-        hasUser: false,
-      });
-    }
-    res.render("pages/moodTracker", { username: user.username, hasUser: true });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Server error");
-  }
-});
-
-app.get("/api/mood-data", async (req, res) => {
-  try {
-    const user = await resolveCurrentUser(req);
-    if (!user) return res.json({ moods: [] });
-    res.json({ moods: user.moods || [] });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ moods: [] });
-  }
-});
-
+app.use("/", authRouter);
+app.use("/", trackerRouter);
+app.use("/dashboard", dashboardRouter);
+app.use("/jar", jarRouter);
 app.use("/mood", moodRouter);
-
 app.use("/solace", solaceRouter);
 
 app.listen(8000, (req, res) => {

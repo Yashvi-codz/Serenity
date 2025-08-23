@@ -2,6 +2,12 @@
   padding: 0;
   margin: 0;
 }
+.container-fluid{
+  margin-left: 180px;
+}
+.nav-item{
+  margin-right: 20px;
+}
 .nav {
   display: flex;
   justify-content: space-between;
@@ -11,25 +17,7 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   background: none;
 }
-.logo {
-  display: flex;
-  height: 50px;
-  width: 50px;
-  background: linear-gradient(90deg, #9c27b0 0%, #e91e63 100%);
-  margin-right: 5px;
-  margin-bottom: 10px;
-  border-radius: 50%;
-  padding: 0;
-  text-decoration: none;
-  color: black;
-}
-.logo i{
-  padding: 10px;
-  font-size: 30px;
-}
-.logo h1{
-  margin-left: 22px;
-}
+
 .home-btn {
   background: linear-gradient(90deg, #9c27b0 0%, #e91e63 100%);
   color: white;
@@ -69,9 +57,65 @@
 }
 .nav-right {
   display: flex;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
 }
 .btn-nav {
   font-weight: 400;
   font-size: 1rem;
   margin-right: 1rem;
+  margin-top: 10px;
+}
+.f-info {
+  height: 8rem;
+  background-color: white;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+.f-info-socials {
+  width: 100%;
+}
+.f-info-socials a {
+  text-decoration: none;
+  color: #222222;
+  font-size: 20px;
+  margin: 0.3rem;
+}
+.f-info-links {
+  width: 100%;
+}
+.f-info-links a {
+  text-decoration: none;
+  color: #222222;
+  margin: 0.3rem;
+}
+.f-info-links a:hover {
+  text-decoration: underline;
+}
+.f-info-company {
+  width: 100%;
+  margin: 0.5rem;
+}
+.logo {
+  display: flex;
+  height: 50px;
+  width: 50px;
+  background: linear-gradient(90deg, #9c27b0 0%, #e91e63 100%);
+  margin-right: 5px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  padding: 0;
+  text-decoration: none;
+  color: black;
+}
+.logo i{
+  padding: 10px;
+  font-size: 30px;
+}
+.logo h1{
+  margin-left: 22px;
 }

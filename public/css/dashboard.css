@@ -10,7 +10,7 @@
 }
 .row2 {
   display: flex;
-  padding-bottom: 80px;
+  padding-bottom: 40px;
   justify-content: center;
   align-content: center;
   text-align: center;
@@ -72,6 +72,9 @@
   min-height: 500px;
   width: 86vw;
 }
+.opt2 h1{
+  padding-top: 30px;
+}
 .opt4 ul {
   list-style: none;
   padding: 0;
@@ -97,4 +100,9 @@
   text-align: center;
   background: #fef4fb;
   border: 2px solid #f8c6e7;
+}
+.row3{
+  margin:0;
+  padding-left: 70px;
+  padding-bottom: 40px;
 }
