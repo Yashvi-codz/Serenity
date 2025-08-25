@@ -83,9 +83,6 @@ app.get("/", (req, res) => {
 });
 
 app.get("/getstarted", (req, res) => {
-  if (req.isAuthenticated()) {
-    return res.redirect("/dashboard");
-  }
   res.render("pages/home.ejs");
 });
 
