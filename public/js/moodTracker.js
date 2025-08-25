@@ -33,7 +33,9 @@ const MOOD_COLORS = {
 const username = window.SERENITY?.username || "demoUser";
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const { moods } = await fetch("/api/mood-data").then(r => r.json());
+  const username = window.SERENITY?.username || "demoUser";
+
+  const { moods } = await fetch(`/api/mood-data?username=${username}`).then(r => r.json());
 
   const items = (moods || [])
     .map(m => ({ ...m, date: new Date(m.date) }))

@@ -7,8 +7,13 @@ module.exports.renderSignUp = (req, res) => {
 module.exports.signUp = async (req, res) => {
   let { username, age, email, password } = req.body;
   const newUser = new User({ username, email, age });
-  await User.register(newUser, password);
-  res.redirect("/dashboard");
+  const registeredUser =  await User.register(newUser, password);
+  req.login(registeredUser, (err) => {
+      if (err) {
+        return next(err);
+      }
+      res.redirect("/dashboard"); 
+    });
 };
 
 module.exports.renderSignIn = (req, res) => {

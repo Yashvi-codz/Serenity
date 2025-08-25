@@ -93,6 +93,10 @@ app.use("/jar", jarRouter);
 app.use("/mood", moodRouter);
 app.use("/solace", solaceRouter);
 
+app.get("/resources",(req,res) => {
+  res.render("pages/resources.ejs");
+})
+
 app.listen(8000, (req, res) => {
   console.log("Server is listening to port 8000");
 });

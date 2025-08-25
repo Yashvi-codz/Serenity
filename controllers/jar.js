@@ -23,5 +23,5 @@ module.exports.storeJar = async (req, res) => {
   const text = (req.body.text || "").trim().slice(0, 500);
   if (!text) return res.redirect("back");
   await SecretNote.create({ userId: req.user._id, month: ym(), text });
-  res.redirect("/dashboard");
+  res.redirect("/jar");
 };
