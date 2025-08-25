@@ -1,7 +1,7 @@
 const User = require("../models/user");
 
 module.exports.renderSignUp = (req, res) => {
-  if (req.isAuthenticated()) {
+  if (req.isAuthenticated && req.isAuthenticated()) {
     return res.redirect("/dashboard");
   }
   res.render("pages/signup.ejs");

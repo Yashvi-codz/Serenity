@@ -83,7 +83,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/getstarted", (req, res) => {
-  res.render("pages/home.ejs");
+  res.render("pages/getStarted.ejs");
 });
 
 app.use("/", authRouter);
