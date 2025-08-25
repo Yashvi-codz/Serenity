@@ -83,7 +83,10 @@ app.get("/", (req, res) => {
 });
 
 app.get("/getstarted", (req, res) => {
-  res.render("pages/getStarted.ejs");
+  if (req.isAuthenticated()) {
+    return res.redirect("/dashboard");
+  }
+  res.render("pages/home.ejs");
 });
 
 app.use("/", authRouter);
