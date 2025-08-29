@@ -20,6 +20,7 @@ const solaceRouter = require("./routes/solace.js");
 const jarRouter = require("./routes/jar.js");
 const User = require("./models/user.js");
 
+// Middleware setup
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "/public")));
@@ -29,33 +30,26 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const dbURL = process.env.ATLASDB_URL;
-
+// Database connection
+const dbURL = process.env.MONGO_URL;
 async function main() {
   await mongoose.connect(dbURL);
 }
-
 main()
-  .then(() => {
-    console.log("Connected to DataBase");
-  })
-  .catch((err) => console.log(err));
+  .then(() => console.log("✅ Connected to Database"))
+  .catch((err) => console.log("❌ DB Error:", err));
 
+// Session store
 const store = MongoStore.create({
   mongoUrl: dbURL,
-  crypto: {
-    secret: process.env.SECRET,
-  },
+  crypto: { secret: process.env.SESSION_SECRET },
   touchAfter: 24 * 3600,
 });
-
-store.on("error", () => {
-  console.log("Error in Mongo", err);
-});
+store.on("error", (err) => console.log("❌ Mongo Session Error:", err));
 
 const sessionOptions = {
   store,
-  secret: process.env.SECRET,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -64,9 +58,9 @@ const sessionOptions = {
     httpOnly: true,
   },
 };
-
 app.use(session(sessionOptions));
 
+// Passport auth
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -78,25 +72,17 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => {
-  res.redirect("/getstarted");
-});
-
-app.get("/getstarted", (req, res) => {
-  res.render("pages/getStarted.ejs");
-});
-
+// Routes
+app.get("/", (req, res) => res.redirect("/getstarted"));
+app.get("/getstarted", (req, res) => res.render("pages/getStarted.ejs"));
 app.use("/", authRouter);
 app.use("/", trackerRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/jar", jarRouter);
 app.use("/mood", moodRouter);
 app.use("/solace", solaceRouter);
+app.get("/resources", (req, res) => res.render("pages/resources.ejs"));
 
-app.get("/resources",(req,res) => {
-  res.render("pages/resources.ejs");
-})
-
-app.listen(8000, (req, res) => {
-  console.log("Server is listening to port 8000");
-});
+// Start server
+const port = process.env.PORT || 8000;
+app.listen(port, () => console.log(`🚀 Server running on port ${port}`));
